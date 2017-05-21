@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
+import { signInUser } from '../../actions';
 
 class SignIn extends Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class SignIn extends Component {
   }
 
   onSubmit(values) {
-    console.log(values);
+    const { email, password } = values;
+    this.props.signInUser({ email, password });
   }
 
   render() {
@@ -27,12 +29,10 @@ class SignIn extends Component {
                 <label htmlFor="email">Email</label>
                 <Field className="form-control" name="email" component="input" type="email" />
               </div>
-
               <div className="form-group">
                 <label htmlFor="password">Password</label>
                 <Field className="form-control" name="password" component="input" type="password" />
               </div>
-
               <button type="submit" className="btn btn-primary">Sign In</button>
             </form>
           </div>
@@ -43,9 +43,10 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = {
+  signInUser: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };
 
 export default reduxForm({
   form: 'SignInForm',
-})(connect(null, {})(SignIn));
+})(connect(null, { signInUser })(SignIn));

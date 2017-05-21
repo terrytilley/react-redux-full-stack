@@ -1,7 +1,8 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import ReduxPromise from 'redux-promise';
+import ReduxThunk from 'redux-thunk';
+// import ReduxPromise from 'redux-promise';
 import { createStore, applyMiddleware } from 'redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -12,7 +13,7 @@ import SignUp from './components/auth/SignUp';
 import Header from './components/Header';
 import './assets/scss/app.scss';
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+const createStoreWithMiddleware = applyMiddleware(ReduxThunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
 render(
