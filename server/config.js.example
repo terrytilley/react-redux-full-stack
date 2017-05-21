@@ -1,0 +1,5 @@
+module.exports = {
+  port: 8080,
+  secret: 'superSecretPhrase',
+  database: 'mongodb://localhost:<port>/<database-name>',
+};
