@@ -35,6 +35,18 @@ export function signInUser({ email, password }, callback) {
   };
 }
 
+export function signUpUser({ email, password }, callback) {
+  return function(dispatch) {
+    axios.post(`${ROOT_URL}/signup`, { email, password })
+      .then((response) => {
+        dispatch({ type: AUTH_USER });
+        localStorage.setItem('token', response.data.token);
+        callback();
+      })
+      .catch(error => dispatch(authError(error.response.data.error)));
+  };
+}
+
 export function signOutUser() {
   localStorage.removeItem('token');
 

@@ -14,7 +14,7 @@ class SignIn extends Component {
   onSubmit(values) {
     const { email, password } = values;
     this.props.signInUser({ email, password }, () => {
-      this.props.history.push('/');
+      this.props.history.push('/dashboard');
     });
   }
 
