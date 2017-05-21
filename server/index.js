@@ -1,4 +1,5 @@
 const http = require('http');
+const cors = require('cors');
 const morgan = require('morgan');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -13,6 +14,7 @@ mongoose.connect(config.database);
 
 // App Setup
 app.use(morgan('dev'));
+app.use(cors());
 app.use(bodyParser.json({ type: '*/*' }));
 router(app);
 
