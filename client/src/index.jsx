@@ -10,6 +10,7 @@ import reducers from './reducers';
 import App from './components/App';
 import SignIn from './components/auth/SignIn';
 import SignUp from './components/auth/SignUp';
+import SignOut from './components/auth/SignOut';
 import Header from './components/Header';
 import './assets/scss/app.scss';
 
@@ -23,6 +24,7 @@ render(
         <Header />
         <Switch>
           <Route path="/signin" component={SignIn} />
+          <Route path="/signout" component={SignOut} />
           <Route path="/signup" component={SignUp} />
           <Route path="/" component={App} />
         </Switch>
