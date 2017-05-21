@@ -13,7 +13,19 @@ class SignIn extends Component {
 
   onSubmit(values) {
     const { email, password } = values;
-    this.props.signInUser({ email, password });
+    this.props.signInUser({ email, password }, () => {
+      this.props.history.push('/');
+    });
+  }
+
+  renderAlert() {
+    if (this.props.errorMessage) {
+      return (
+        <div className="alert alert-danger">
+          <strong>Oops!</strong> {this.props.errorMessage}
+        </div>
+      );
+    }
   }
 
   render() {
@@ -25,6 +37,7 @@ class SignIn extends Component {
           <div className="col-md-6">
             <h2 className="text-center">Sign In</h2>
             <form onSubmit={handleSubmit(this.onSubmit)}>
+              {this.renderAlert()}
               <div className="form-group">
                 <label htmlFor="email">Email</label>
                 <Field className="form-control" name="email" component="input" type="email" />
@@ -47,6 +60,10 @@ SignIn.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
 };
 
+function mapStateToProps(state) {
+  return { errorMessage: state.auth.error };
+}
+
 export default reduxForm({
   form: 'SignInForm',
-})(connect(null, { signInUser })(SignIn));
+})(connect(mapStateToProps, { signInUser })(SignIn));
